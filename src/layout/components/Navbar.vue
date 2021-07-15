@@ -78,7 +78,8 @@ export default {
     }
     }
     .nav-head-right {
-
+      display: flex;
+      align-items: center;
     }
   }
   .menu {

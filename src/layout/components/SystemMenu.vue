@@ -35,6 +35,7 @@
 </template>
 
 <script>
+import { getData } from '@/api/layout'
 export default {
   name: 'SystemMenu',
   data () {
@@ -56,12 +57,20 @@ export default {
       tabIndex: 2
     };
   },
+  mounted() {
+    this.init()
+  },
   methods: {
     handleOpen (key, keyPath) {
       console.log(key, keyPath);
     },
     handleClose (key, keyPath) {
       console.log(key, keyPath);
+    },
+    init() {
+      getData().then(res => {
+        console.log(res, 111);
+      })
     }
   }
 }
