@@ -8,7 +8,7 @@
           alt=""
         >
         <div class="plant-name">{{ plantName }}</div>
-        <Tabs />
+
       </div>
       <div class="nav-head-right">
         <span>{{ userName }},您好！</span>
@@ -19,11 +19,10 @@
 </template>
 
 <script>
-import Tabs from './Tabs/index.vue'
 export default {
   name: 'Navbar',
   components: {
-    Tabs
+
   },
   data () {
     return {

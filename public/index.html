@@ -14,10 +14,10 @@
     body,
     #app {
       height: 100%;
-      background: #031C3A;
+      background: #fff;
       margin: 0;
       padding: 0;
-      color: #fff;
+      color: #000;
     }
   </style>
 </head>
@@ -28,6 +28,10 @@
         Please enable it to continue.</strong>
   </noscript>
   <div id="app"></div>
+  <script src="<%= BASE_URL %>util/aes.js" charset="utf-8"></script>
+  <script src="<%= BASE_URL %>util/crypto-js.js" charset="utf-8"></script>
+  <script src="<%= BASE_URL %>util/mode-ecb.js" charset="utf-8"></script>
+  <script src="<%= BASE_URL %>util/pad-zeropadding.js" charset="utf-8"></script>
   <!-- built files will be auto injected -->
 </body>
 

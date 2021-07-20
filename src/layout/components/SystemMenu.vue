@@ -57,7 +57,7 @@ export default {
       tabIndex: 2
     };
   },
-  mounted() {
+  mounted () {
     this.init()
   },
   methods: {
@@ -67,7 +67,7 @@ export default {
     handleClose (key, keyPath) {
       console.log(key, keyPath);
     },
-    init() {
+    init () {
       getData().then(res => {
         console.log(res, 111);
       })
@@ -77,9 +77,10 @@ export default {
 </script>
 <style lang="less" scoped>
 .system-menu {
+  border: 1px solid #0000ff;
   width: 6.4rem;
   height: calc(100vh - 8.7rem);
-  background-color: #032144;
+  background-color: #fff;
   margin-left: 0.8rem;
   overflow: hidden;
   .menu {
@@ -88,12 +89,13 @@ export default {
     .el-menu {
       background-color: transparent;
     }
-    .el-menu-item:focus, .el-menu-item:hover {
+    .el-menu-item:focus,
+    .el-menu-item:hover {
       background-color: transparent;
-      color: #3AD954;
+      color: #3ad954;
     }
-    .el-menu-item.is-active{
-      color: #3AD954;
+    .el-menu-item.is-active {
+      color: #3ad954;
     }
   }
 }

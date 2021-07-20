@@ -1,49 +1,117 @@
 <template>
   <div class="login">
-    <div class="login-form">
-      <div class="title">
+    <el-form
+      ref="loginForm"
+      class="login-form"
+      status-icon
+      :rules="loginRules"
+      :model="loginForm"
+      label-width="0"
+    >
+      <el-form-item class="title">
         <span class="cn">登录</span>
         /Sign Up
-      </div>
-      <el-input
-        v-model="userName"
-        class="ipt"
-        size="large"
-        placeholder="用户名"
-        @blur="validateName"
-      >
-      </el-input>
-      <el-input
-        v-model="userName"
-        class="ipt"
-        size="large"
-        placeholder="密码"
-        @blur="validateName"
-      >
-      </el-input>
-      <div class="save-pwd">
-        <el-checkbox v-model="checked">记住密码</el-checkbox>
-      </div>
-      <el-button type="primary" class="btn" @click="login">登录</el-button>
-    </div>
-
+      </el-form-item>
+      <el-form-item prop="username">
+        <el-input
+          v-model="loginForm.username"
+          auto-complete="off"
+          placeholder="请输入用户名"
+          name="loginName"
+          @keyup.enter="handleLogin"
+        >
+          <template #prefix>
+            <i class="el-icon-user"></i>
+          </template>
+        </el-input>
+      </el-form-item>
+      <el-form-item prop="password">
+        <el-input
+          v-model="loginForm.password"
+          name="password"
+          :type="passwordType"
+          auto-complete="off"
+          placeholder="请输入密码"
+          @keyup.enter="handleLogin"
+        >
+          <template #suffix>
+            <i
+              class="el-icon-view el-input__icon"
+              @click="showPassword"
+            ></i>
+          </template>
+          <template #prefix>
+            <i class="el-icon-user"></i>
+          </template>
+        </el-input>
+      </el-form-item>
+      <!-- <el-form-item prop="checked">
+        <el-checkbox v-model="loginForm.checked">记住密码</el-checkbox>
+      </el-form-item> -->
+      <el-form-item>
+        <el-button
+          type="primary"
+          class="login-submit"
+          @click.prevent="handleLogin"
+        >登录
+        </el-button>
+      </el-form-item>
+    </el-form>
   </div>
 </template>
 <script>
 export default {
   data () {
     return {
-      userName: '' // 用户名
+      loginForm: {
+        username: '', // 默认登录时的用户名和密码
+        password: '',
+        code: '',
+        redomStr: ''
+      },
+      loginRules: {
+        username: [
+          { required: true, message: '请输入用户名', trigger: 'blur' }
+        ],
+        password: [
+          { required: true, message: '请输入密码', trigger: 'blur' },
+          { min: 6, message: '密码长度最少为6位', trigger: 'blur' }
+        ],
+        code: [
+          { required: true, message: '请输入验证码', trigger: 'blur' },
+          { min: 4, max: 4, message: '验证码长度为4位', trigger: 'blur' }
+        ]
+      },
+      passwordType: 'password'
     }
   },
   methods: {
-    validateName (value) {
-      console.log(value, 111);
+    handleLogin() {
+      console.log(this.loginForm, 123);
+      this.$refs.loginForm.validate(valid => {
+        if (valid) {
+          // console.log(this.loginForm)
+          this.$store
+            .dispatch('LoginByUsername', this.loginForm)
+            .then(() => {
+              this.$router.push({ path: this.tagWel.value });
+              this.uid = JSON.parse(
+                sessionStorage.getItem('user')
+              ).user.user_id;
+              // 获取权限
+              // this.getAuthority({ userId: this.$store.state.user.user_id });
+            })
+            .catch(() => {
+              // this.refreshCode();
+              this.$emit('closeLogin', false)
+            });
+        }
+      });
     },
-    login () {
-      this.$router.push({
-        path: '/'
-      })
+    showPassword() {
+      this.passwordType === ''
+        ? (this.passwordType = 'password')
+        : (this.passwordType = '');
     }
   }
 }
@@ -83,7 +151,7 @@ export default {
     .ipt {
       margin-bottom: 2rem;
     }
-    .btn {
+    .login-submit {
       width: 100%;
     }
   }

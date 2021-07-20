@@ -10,27 +10,44 @@ const routes = [
       {
         path: '/',
         name: 'home',
-        component: () => import(/* webpackChunkName: "home" */ '../views/home/index.vue')
+        component: () => import(/* webpackChunkName: "home" */ '@/views/home/index.vue')
       },
       {
         path: '/application',
         name: 'application',
-        component: () => import(/* webpackChunkName: "application" */ '../views/application/index.vue')
+        component: () => import(/* webpackChunkName: "application" */ '@/views/application/index.vue')
       },
       {
         path: '/datas',
         name: 'datas',
-        component: () => import(/* webpackChunkName: "datas" */ '../views/datas/index.vue')
+        component: () => import(/* webpackChunkName: "datas" */ '@/views/datas/index.vue')
       },
       {
         path: '/appStore',
         name: 'appStore',
-        component: () => import(/* webpackChunkName: "appStore" */ '../views/appStore/index.vue')
+        component: () => import(/* webpackChunkName: "appStore" */ '@/views/appStore/index.vue')
       },
       {
         path: '/settings',
         name: 'settings',
-        component: () => import(/* webpackChunkName: "settings" */ '../views/settings/index.vue')
+        component: () => import(/* webpackChunkName: "settings" */ '@/views/settings/index.vue'),
+        children: [
+          {
+            path: '/settings/account',
+            name: 'account',
+            component: () => import(/* webpackChunkName: "account" */ '@/views/settings/components/account.vue')
+          },
+          {
+            path: '/settings/organization',
+            name: 'organization',
+            component: () => import(/* webpackChunkName: "organization" */ '@/views/settings/components/organization.vue')
+          },
+          {
+            path: '/settings/role',
+            name: 'role',
+            component: () => import(/* webpackChunkName: "role" */ '@/views/settings/components/role.vue')
+          }
+        ]
       }
     ]
   },
