@@ -219,6 +219,7 @@
     <MyDialog
       v-show="dialogShow"
       :title="dialogTitle"
+      :show-cancel="true"
       @closeSettings="closeSettings"
       @saveSettings="saveSettings"
     >
@@ -928,7 +929,7 @@ export default {
 
 <style scoped lang="less">
 .account {
-  width: 100%;
+  width: calc(100% - 4rem);
   height: calc(100% - 4rem);
   display: flex;
   flex-direction: column;

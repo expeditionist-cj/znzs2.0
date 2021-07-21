@@ -1,59 +1,28 @@
 <template>
   <div class="settings">
     <el-scrollbar class="nav-left">
-      <div v-for="(item,index) in settingsMenu" :key="index" class="list">
+      <div
+        v-for="(item,index) in settingsMenu"
+        :key="index"
+        class="list"
+      >
         <div class="title">{{ item.title }}</div>
         <div class="content">
-          <div v-for="(itm,idx) in item.children" :key="idx" class="box" @click="onCheck(itm)">
-            <i :class="itm.iconClass"></i>
+          <div
+            v-for="(itm,idx) in item.children"
+            :key="idx"
+            class="box"
+            :class="{active: item.component === activePage}"
+            @click="onCheck(itm)"
+          >
+            <!-- <i :class="itm.iconClass"></i> -->
+            <svg
+              class="icon box-icon-font"
+              aria-hidden="true"
+            >
+              <use :xlink:href="'#'+itm.iconClass" />
+            </svg>
             <div>{{ itm.name }}</div>
-          </div>
-        </div>
-      </div>
-      <div class="list">
-        <div class="title">模型配置</div>
-        <div class="content">
-          <div class="box">
-            <i class="el-icon-user"></i>
-            <div>分类管理</div>
-          </div>
-          <div class="box">
-            <i class="el-icon-user"></i>
-            <div>模型管理</div>
-          </div>
-        </div>
-      </div>
-      <div class="list">
-        <div class="title">数据配置</div>
-        <div class="content">
-          <div class="box">
-            <i class="el-icon-user"></i>
-            <div>数据源配置</div>
-          </div>
-          <div class="box">
-            <i class="el-icon-user"></i>
-            <div>数据标准化</div>
-          </div>
-          <div class="box">
-            <i class="el-icon-user"></i>
-            <div>数据补录</div>
-          </div>
-        </div>
-      </div>
-      <div class="list">
-        <div class="title">其他配置</div>
-        <div class="content">
-          <div class="box">
-            <i class="el-icon-user"></i>
-            <div>排班配置</div>
-          </div>
-          <div class="box">
-            <i class="el-icon-user"></i>
-            <div>主页配置</div>
-          </div>
-          <div class="box">
-            <i class="el-icon-user"></i>
-            <div>订阅配置</div>
           </div>
         </div>
       </div>
@@ -63,7 +32,10 @@
         <router-view :key="$route.path" />
       </transition> -->
       <router-view v-slot="{ Component }">
-        <transition name="fade-transform" mode="out-in">
+        <transition
+          name="fade-transform"
+          mode="out-in"
+        >
           <keep-alive>
             <component :is="Component" />
           </keep-alive>
@@ -74,28 +46,36 @@
 </template>
 <script>
 import settingsMenu from '@/utils/settingsMenu'
+import { mapState } from 'vuex'
 export default {
-  data() {
+  data () {
     return {
       settingsMenu
     }
   },
+  computed: {
+    ...mapState({
+      activePage: (state) => state.settings.activePage
+    })
+  },
   methods: {
-    onCheck(item) {
+    onCheck (item) {
+      console.log(item, 100);
       this.$router.push({
         path: item.path
       })
+      this.$store.commit('SET_ACTIVEPAGE', item.component)
+      console.log(this.activePage)
     }
   }
 }
 </script>
 <style lang="less" scoped>
 .settings {
-  width: calc(100% - 6.4rem);
+  width: 100%;
   height: 100%;
   display: flex;
   .nav-left {
-    border: 1px solid red;
     width: 24rem;
     padding: 0 1rem;
     height: 100%;
@@ -122,63 +102,21 @@ export default {
           &:hover {
             color: #54d887;
           }
+          .box-icon-font {
+            font-size: 2rem;
+            margin-bottom: 0.2rem;
+          }
+        }
+        .active {
+          color: #3ad954;
+          background-color: #0f0f0f;
         }
       }
     }
   }
   .content-right {
-    width: calc(100% - 30.4rem);
+    width: calc(100% - 26.5rem);
     height: 100%;
-    border: 1px solid #000;
   }
 }
-// global transition css
-
-/* fade */
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.28s;
-}
-
-.fade-enter,
-.fade-leave-active {
-  opacity: 0;
-}
-
-/* fade-transform */
-.fade-transform-leave-active,
-.fade-transform-enter-active {
-  transition: all .5s;
-}
-
-.fade-transform-enter {
-  opacity: 0;
-  transform: translateX(-30px);
-}
-
-.fade-transform-leave-to {
-  opacity: 0;
-  transform: translateX(30px);
-}
-
-/* breadcrumb transition */
-.breadcrumb-enter-active,
-.breadcrumb-leave-active {
-  transition: all .5s;
-}
-
-.breadcrumb-enter,
-.breadcrumb-leave-active {
-  opacity: 0;
-  transform: translateX(20px);
-}
-
-.breadcrumb-move {
-  transition: all .5s;
-}
-
-.breadcrumb-leave-active {
-  position: absolute;
-}
-
 </style>

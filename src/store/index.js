@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import Vuex from 'vuex'
 import user from './modules/user'
+import settings from './modules/settings'
 import vuejsStorage from 'vuejs-storage';
 const app = createApp({})
 app.use(Vuex)
@@ -8,7 +9,8 @@ app.use(vuejsStorage)
 app.mount('#app')
 const store = new Vuex.Store({
   modules: {
-    user
+    user,
+    settings
   },
   plugins: [
     vuejsStorage({

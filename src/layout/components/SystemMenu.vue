@@ -10,23 +10,23 @@
         @close="handleClose"
       >
         <el-menu-item index="/">
-          <i class="el-icon-menu"></i>
+          <svg class="icon menu-icon-font" aria-hidden="true"> <use xlink:href="#icon-zhuye1" /> </svg>
           <template #title>首页</template>
         </el-menu-item>
         <el-menu-item index="/application">
-          <i class="el-icon-document"></i>
+          <svg class="icon menu-icon-font" aria-hidden="true"> <use xlink:href="#icon-moxingyingyong" /> </svg>
           <template #title>应用</template>
         </el-menu-item>
         <el-menu-item index="/datas">
-          <i class="el-icon-setting"></i>
+          <svg class="icon menu-icon-font" aria-hidden="true"> <use xlink:href="#icon-shebei" /> </svg>
           <template #title>数据</template>
         </el-menu-item>
         <el-menu-item index="/appStore">
-          <i class="el-icon-setting"></i>
+          <svg class="icon menu-icon-font" aria-hidden="true"> <use xlink:href="#icon-shangcheng" /> </svg>
           <template #title>商城</template>
         </el-menu-item>
         <el-menu-item index="/settings">
-          <i class="el-icon-setting"></i>
+          <svg class="icon menu-icon-font" aria-hidden="true"> <use xlink:href="#icon-xitong1" /> </svg>
           <template #title>设置</template>
         </el-menu-item>
       </el-menu>
@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import { getData } from '@/api/layout'
+// import { getData } from '@/api/layout'
 export default {
   name: 'SystemMenu',
   data () {
@@ -58,7 +58,7 @@ export default {
     };
   },
   mounted () {
-    this.init()
+    // this.init()
   },
   methods: {
     handleOpen (key, keyPath) {
@@ -68,19 +68,18 @@ export default {
       console.log(key, keyPath);
     },
     init () {
-      getData().then(res => {
-        console.log(res, 111);
-      })
+      // getData().then(res => {
+      //   console.log(res, 111);
+      // })
     }
   }
 }
 </script>
 <style lang="less" scoped>
 .system-menu {
-  border: 1px solid #0000ff;
   width: 6.4rem;
   height: calc(100vh - 8.7rem);
-  background-color: #fff;
+  background-color: #f0f0f0;
   margin-left: 0.8rem;
   overflow: hidden;
   .menu {
@@ -91,11 +90,15 @@ export default {
     }
     .el-menu-item:focus,
     .el-menu-item:hover {
-      background-color: transparent;
+      background-color: #0f0f0f;
       color: #3ad954;
     }
     .el-menu-item.is-active {
       color: #3ad954;
+      background-color: #0f0f0f;
+    }
+    .menu-icon-font {
+      font-size: 2rem;
     }
   }
 }

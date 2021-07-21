@@ -93,17 +93,18 @@ export default {
           // console.log(this.loginForm)
           this.$store
             .dispatch('LoginByUsername', this.loginForm)
-            .then(() => {
-              this.$router.push({ path: this.tagWel.value });
-              this.uid = JSON.parse(
-                sessionStorage.getItem('user')
-              ).user.user_id;
+            .then((res) => {
+              console.log(res, 100);
+              this.$router.push({ path: '/' });
+              // this.uid = JSON.parse(
+              //   sessionStorage.getItem('user')
+              // ).user.user_id;
               // 获取权限
               // this.getAuthority({ userId: this.$store.state.user.user_id });
             })
             .catch(() => {
               // this.refreshCode();
-              this.$emit('closeLogin', false)
+              // this.$emit('closeLogin', false)
             });
         }
       });

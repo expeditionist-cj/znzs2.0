@@ -1,0 +1,170 @@
+{
+  "id": "2684404",
+  "name": "环保运营智慧服务平台icon",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "22967028",
+      "name": "主导航_系统_p",
+      "font_class": "xitong",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
+      "icon_id": "22967151",
+      "name": "主导航_主页",
+      "font_class": "zhuye1",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    },
+    {
+      "icon_id": "22967152",
+      "name": "主导航_设备",
+      "font_class": "shebei",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    },
+    {
+      "icon_id": "22967154",
+      "name": "主导航_商城_p",
+      "font_class": "shangcheng_p",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    },
+    {
+      "icon_id": "22967156",
+      "name": "主导航_主页_p",
+      "font_class": "zhuye_p",
+      "unicode": "e605",
+      "unicode_decimal": 58885
+    },
+    {
+      "icon_id": "22967157",
+      "name": "主导航_商城",
+      "font_class": "shangcheng",
+      "unicode": "e606",
+      "unicode_decimal": 58886
+    },
+    {
+      "icon_id": "22967158",
+      "name": "主导航_应用_p",
+      "font_class": "moxingyingyong_p",
+      "unicode": "e607",
+      "unicode_decimal": 58887
+    },
+    {
+      "icon_id": "22967159",
+      "name": "主导航_应用",
+      "font_class": "moxingyingyong",
+      "unicode": "e608",
+      "unicode_decimal": 58888
+    },
+    {
+      "icon_id": "22967217",
+      "name": "主导航_系统",
+      "font_class": "xitong1",
+      "unicode": "e609",
+      "unicode_decimal": 58889
+    },
+    {
+      "icon_id": "22967546",
+      "name": "主导航_数据_p",
+      "font_class": "zhudaohang_shuju_p",
+      "unicode": "e60a",
+      "unicode_decimal": 58890
+    },
+    {
+      "icon_id": "1365813",
+      "name": "粗线-换肤",
+      "font_class": "icon-huanfu",
+      "unicode": "8bbe",
+      "unicode_decimal": 35774
+    },
+    {
+      "icon_id": "2959039",
+      "name": "角色管理",
+      "font_class": "jiaoseguanli",
+      "unicode": "e623",
+      "unicode_decimal": 58915
+    },
+    {
+      "icon_id": "3874021",
+      "name": "尺子",
+      "font_class": "chizi",
+      "unicode": "e62d",
+      "unicode_decimal": 58925
+    },
+    {
+      "icon_id": "5387786",
+      "name": "人工补码_o",
+      "font_class": "rengongbuma_o",
+      "unicode": "eb55",
+      "unicode_decimal": 60245
+    },
+    {
+      "icon_id": "6455673",
+      "name": "账号管理",
+      "font_class": "zhanghaoguanli",
+      "unicode": "e666",
+      "unicode_decimal": 58982
+    },
+    {
+      "icon_id": "6970029",
+      "name": "信息采集",
+      "font_class": "xinxicaiji",
+      "unicode": "e704",
+      "unicode_decimal": 59140
+    },
+    {
+      "icon_id": "8084570",
+      "name": "权限",
+      "font_class": "quanxian",
+      "unicode": "e618",
+      "unicode_decimal": 58904
+    },
+    {
+      "icon_id": "8361866",
+      "name": "主页",
+      "font_class": "zhuye",
+      "unicode": "e6d3",
+      "unicode_decimal": 59091
+    },
+    {
+      "icon_id": "16239610",
+      "name": "数据源配置",
+      "font_class": "shujuyuanpeizhi",
+      "unicode": "e61d",
+      "unicode_decimal": 58909
+    },
+    {
+      "icon_id": "16271372",
+      "name": "消息",
+      "font_class": "xiaoxi",
+      "unicode": "e64f",
+      "unicode_decimal": 58959
+    },
+    {
+      "icon_id": "16365867",
+      "name": "机构",
+      "font_class": "jigou",
+      "unicode": "e695",
+      "unicode_decimal": 59029
+    },
+    {
+      "icon_id": "18185071",
+      "name": "绑定",
+      "font_class": "bangding",
+      "unicode": "e63f",
+      "unicode_decimal": 58943
+    },
+    {
+      "icon_id": "20853334",
+      "name": "个人中心",
+      "font_class": "gerenzhongxin",
+      "unicode": "e6a4",
+      "unicode_decimal": 59044
+    }
+  ]
+}

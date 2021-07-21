@@ -390,7 +390,7 @@ export default {
 
 <style scoped lang="less">
 .roleManagement {
-  width: 100%;
+  width: calc(100% - 4rem);
   height: calc(100% - 4rem);
   display: flex;
   flex-direction: column;

@@ -251,7 +251,7 @@ export default {
 </script>
 <style lang="less" >
 .organization {
-  width: 100%;
+  width: calc(100% - 4rem);
   height: calc(100% - 4rem);
   background: url("../../../assets/images/border.png") no-repeat center;
   background-size: 100% 100%;

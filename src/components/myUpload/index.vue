@@ -1,10 +1,10 @@
 <template>
   <div class="myUpload-wrap">
     <el-dialog
-      :visible.sync="importExcelDialogVisible"
+      :model-value="importExcelDialogVisible"
       :before-close="beforeClose"
       title="导入excel"
-      width="600px!important"
+      width="60%"
     >
       <!-- <div style="width:50%;margin-bottom:20px">
       <el-date-picker
@@ -27,20 +27,26 @@
         :on-change="changeFile"
         :auto-upload="false"
       >
-        <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
-        <div slot="tip" class="el-upload__tip">
-          Excel文件，且不超过500kb
-        </div>
+        <template #trigger>
+          <el-button size="small" type="primary">选取文件</el-button>
+        </template>
+        <template #tip>
+          <div class="el-upload__tip">
+            Excel文件，且不超过500kb
+          </div>
+        </template>
       </el-upload>
-      <span slot="footer" class="dialog-footer">
-        <el-button type="primary" size="small" @click="onCloseDialog">取 消</el-button>
-        <el-button
-          size="small"
-          type="primary"
-          :loading="submitLoading"
-          @click="submitUpload"
-        >上传文件</el-button>
-      </span>
+      <template #footer>
+        <span class="dialog-footer">
+          <el-button type="primary" size="small" @click="onCloseDialog">取 消</el-button>
+          <el-button
+            size="small"
+            type="primary"
+            :loading="submitLoading"
+            @click="submitUpload"
+          >上传文件</el-button>
+        </span>
+      </template>
     </el-dialog>
   </div>
 </template>
