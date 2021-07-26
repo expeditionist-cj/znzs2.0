@@ -15,10 +15,11 @@ const store = new Vuex.Store({
   plugins: [
     vuejsStorage({
       keys: [
-        'user.user_id'
+        'user.user_id',
+        'user.access_token'
       ],
       // keep state.count in localStorage
-      namespace: 'user',
+      namespace: 'session',
       driver: vuejsStorage.drivers.sessionStorage
       // if you want to use sessionStorage instead of localStorage
     })

@@ -1,3 +1,4 @@
+
 import axios from 'axios'
 // 创建axios实例
 const proUrl = '/assistant'
@@ -33,8 +34,17 @@ const service = axios.create({
     return data
   }]
 })
+
 // 请求拦截器
 service.interceptors.request.use((config) => {
+  // console.log(config, 111)
+  const isToken = (config.headers || {}).isToken === false
+  const token = JSON.parse(window.sessionStorage.getItem('session')).user['access_token']
+  if (token && !isToken) {
+    config.headers['Authorization'] = 'Bearer ' + token// token
+  }
+  // 为请求头对象，添加 Token 验证的 Authorization 字段
+  // config.headers.Authorization = window.sessionStorage.getItem('sca-access_token')
   return config
 }, (error) => {
   // 错误抛到业务代码

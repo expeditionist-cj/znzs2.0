@@ -10,23 +10,48 @@
         @close="handleClose"
       >
         <el-menu-item index="/">
-          <svg class="icon menu-icon-font" aria-hidden="true"> <use xlink:href="#icon-zhuye1" /> </svg>
+          <svg
+            class="icon menu-icon-font"
+            aria-hidden="true"
+          >
+            <use xlink:href="#icon-zhuye_p" />
+          </svg>
           <template #title>首页</template>
         </el-menu-item>
         <el-menu-item index="/application">
-          <svg class="icon menu-icon-font" aria-hidden="true"> <use xlink:href="#icon-moxingyingyong" /> </svg>
+          <svg
+            class="icon menu-icon-font"
+            aria-hidden="true"
+          >
+            <use xlink:href="#icon-moxingyingyong_p" />
+          </svg>
           <template #title>应用</template>
         </el-menu-item>
         <el-menu-item index="/datas">
-          <svg class="icon menu-icon-font" aria-hidden="true"> <use xlink:href="#icon-shebei" /> </svg>
+          <svg
+            class="icon menu-icon-font"
+            aria-hidden="true"
+          >
+            <use xlink:href="#icon-zhudaohang_shuju_p" />
+          </svg>
           <template #title>数据</template>
         </el-menu-item>
         <el-menu-item index="/appStore">
-          <svg class="icon menu-icon-font" aria-hidden="true"> <use xlink:href="#icon-shangcheng" /> </svg>
+          <svg
+            class="icon menu-icon-font"
+            aria-hidden="true"
+          >
+            <use xlink:href="#icon-shangcheng_p" />
+          </svg>
           <template #title>商城</template>
         </el-menu-item>
         <el-menu-item index="/settings">
-          <svg class="icon menu-icon-font" aria-hidden="true"> <use xlink:href="#icon-xitong1" /> </svg>
+          <svg
+            class="icon menu-icon-font"
+            aria-hidden="true"
+          >
+            <use xlink:href="#icon-xitong" />
+          </svg>
           <template #title>设置</template>
         </el-menu-item>
       </el-menu>
@@ -79,8 +104,7 @@ export default {
 .system-menu {
   width: 6.4rem;
   height: calc(100vh - 8.7rem);
-  background-color: #f0f0f0;
-  margin-left: 0.8rem;
+  background-color: #1f7c73;
   overflow: hidden;
   .menu {
     width: 6.4rem;
@@ -88,14 +112,17 @@ export default {
     .el-menu {
       background-color: transparent;
     }
+    .el-menu-item {
+      color: #d2e4e3;
+    }
     .el-menu-item:focus,
     .el-menu-item:hover {
-      background-color: #0f0f0f;
-      color: #3ad954;
+      background-color: #1c6c64;
+      color: #54e194;
     }
     .el-menu-item.is-active {
-      color: #3ad954;
-      background-color: #0f0f0f;
+      color: #54e194;
+      background-color: #1c6c64;
     }
     .menu-icon-font {
       font-size: 2rem;

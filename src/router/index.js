@@ -67,5 +67,12 @@ const router = createRouter({
   history: createWebHashHistory(),
   routes
 })
-
+router.beforeEach((to, from, next) => {
+  const token = JSON.parse(window.sessionStorage.getItem('session')).user['access_token']
+  if (to.path === '/login' || token) {
+    next()
+  } else {
+    next('/login')
+  }
+})
 export default router

@@ -5,6 +5,8 @@
 </template>
 <style lang="less" scoped>
 .Footer {
-  height: 3rem;
+  color: #fff;
+  height: 3.1rem;
+  background-color: #1b5852;
 }
 </style>

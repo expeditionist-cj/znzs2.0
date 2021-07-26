@@ -25,6 +25,7 @@ export default {
 </script>
 <style lang="less" scoped>
 .layout {
+  // background-color: #1b5852;
   .layout-content {
     display: flex;
   }

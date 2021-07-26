@@ -27,11 +27,14 @@
     <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled.
         Please enable it to continue.</strong>
   </noscript>
-  <div id="app"></div>
+  <div id="app">
+    <canvas id="canvas" width="2560" height="1000" style="min-width: 1000px; width: 100%; position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%)"></canvas>
+  </div>
   <script src="<%= BASE_URL %>util/aes.js" charset="utf-8"></script>
   <script src="<%= BASE_URL %>util/crypto-js.js" charset="utf-8"></script>
   <script src="<%= BASE_URL %>util/mode-ecb.js" charset="utf-8"></script>
   <script src="<%= BASE_URL %>util/pad-zeropadding.js" charset="utf-8"></script>
+  <script src="<%= BASE_URL %>util/jwmeyy.js" charset="utf-8"></script>
   <!-- built files will be auto injected -->
 </body>
 

@@ -2,11 +2,15 @@ import { loginByUsername, logout } from '@/api/login'
 import { encryption } from '@/utils/util'
 const user = {
   state: {
-    user_id: ''
+    user_id: '',
+    access_token: ''
   },
   mutations: {
     SET_USER_ID: (state, userId) => {
       state.user_id = userId
+    },
+    SET_ACCESS_TOKEN: (state, access_token) => {
+      state.access_token = access_token
     }
   },
   actions: {
@@ -22,7 +26,8 @@ const user = {
           const data = response.data;
           sessionStorage.setItem('user', data);
           commit('SET_USER_ID', data.user_id)
-          resolve()
+          commit('SET_ACCESS_TOKEN', data.access_token)
+          resolve(response)
         }).catch(error => {
           reject(error)
         })
@@ -33,7 +38,7 @@ const user = {
       return new Promise((resolve, reject) => {
         logout().then(() => {
           commit('SET_USER_ID', '')
-
+          commit('SET_ACCESS_TOKEN', '')
           resolve()
         }).catch(error => {
           reject(error)
