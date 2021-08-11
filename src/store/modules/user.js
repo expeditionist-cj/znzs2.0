@@ -39,6 +39,11 @@ const user = {
         logout().then(() => {
           commit('SET_USER_ID', '')
           commit('SET_ACCESS_TOKEN', '')
+          commit('SET_NAVEBARLIST', [{
+            title: '首页',
+            path: '/'
+          }])
+          commit('SET_ACTIVEBAR', '/')
           resolve()
         }).catch(error => {
           reject(error)

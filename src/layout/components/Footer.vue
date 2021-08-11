@@ -6,7 +6,7 @@
 <style lang="less" scoped>
 .Footer {
   color: #fff;
-  height: 3.1rem;
+  height: 3rem;
   background-color: #1b5852;
 }
 </style>

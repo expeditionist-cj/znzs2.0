@@ -35,3 +35,4 @@ export const encryption = (params) => {
   }
   return result
 }
+

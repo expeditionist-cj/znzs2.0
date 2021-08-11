@@ -2,57 +2,78 @@
   <div class="system-menu">
     <div class="menu">
       <el-menu
-        default-active="/"
+        :default-active="$route.path || '/'"
         class="el-menu-vertical-demo"
         router
         :collapse="isCollapse"
         @open="handleOpen"
         @close="handleClose"
+        @select="handleSelect"
       >
         <el-menu-item index="/">
-          <svg
-            class="icon menu-icon-font"
-            aria-hidden="true"
-          >
-            <use xlink:href="#icon-zhuye_p" />
-          </svg>
-          <template #title>首页</template>
+          <div class="menu-title">
+            <svg
+              class="icon menu-icon-font"
+              aria-hidden="true"
+            >
+              <use xlink:href="#icon-zhuye_p" />
+            </svg>
+            <div class="title-name">
+              首页
+            </div>
+          </div>
         </el-menu-item>
         <el-menu-item index="/application">
-          <svg
-            class="icon menu-icon-font"
-            aria-hidden="true"
-          >
-            <use xlink:href="#icon-moxingyingyong_p" />
-          </svg>
-          <template #title>应用</template>
+          <div class="menu-title">
+            <svg
+              class="icon menu-icon-font"
+              aria-hidden="true"
+            >
+              <use xlink:href="#icon-moxingyingyong_p" />
+            </svg>
+            <div class="title-name">
+              应用
+            </div>
+          </div>
         </el-menu-item>
-        <el-menu-item index="/datas">
-          <svg
-            class="icon menu-icon-font"
-            aria-hidden="true"
-          >
-            <use xlink:href="#icon-zhudaohang_shuju_p" />
-          </svg>
-          <template #title>数据</template>
+        <el-menu-item index="/datas/home">
+          <div class="menu-title">
+            <svg
+              class="icon menu-icon-font"
+              aria-hidden="true"
+            >
+              <use xlink:href="#icon-zhudaohang_shuju_p" />
+            </svg>
+            <div class="title-name">
+              数据
+            </div>
+          </div>
         </el-menu-item>
-        <el-menu-item index="/appStore">
-          <svg
-            class="icon menu-icon-font"
-            aria-hidden="true"
-          >
-            <use xlink:href="#icon-shangcheng_p" />
-          </svg>
-          <template #title>商城</template>
+        <el-menu-item index="/appStore/appHome">
+          <div class="menu-title">
+            <svg
+              class="icon menu-icon-font"
+              aria-hidden="true"
+            >
+              <use xlink:href="#icon-shangcheng_p" />
+            </svg>
+            <div class="title-name">
+              商城
+            </div>
+          </div>
         </el-menu-item>
         <el-menu-item index="/settings">
-          <svg
-            class="icon menu-icon-font"
-            aria-hidden="true"
-          >
-            <use xlink:href="#icon-xitong" />
-          </svg>
-          <template #title>设置</template>
+          <div class="menu-title">
+            <svg
+              class="icon menu-icon-font"
+              aria-hidden="true"
+            >
+              <use xlink:href="#icon-xitong" />
+            </svg>
+            <div class="title-name">
+              设置
+            </div>
+          </div>
         </el-menu-item>
       </el-menu>
     </div>
@@ -61,25 +82,31 @@
 
 <script>
 // import { getData } from '@/api/layout'
+const dict = [
+  {
+    name: '首页',
+    path: '/'
+  }, {
+    name: '应用',
+    path: '/application'
+  },
+  {
+    name: '数据',
+    path: '/datas/home'
+  }, {
+    name: '商城',
+    path: '/appStore/appHome'
+  },
+  {
+    name: '设置',
+    path: '/settings'
+  }
+]
 export default {
   name: 'SystemMenu',
   data () {
     return {
-      isCollapse: true,
-      plantName: '新昌电厂',
-      editableTabsValue: '2',
-      editableTabs: [
-        {
-          title: 'Tab 1',
-          name: '1',
-          content: 'Tab 1 content'
-        }, {
-          title: 'Tab 2',
-          name: '2',
-          content: 'Tab 2 content'
-        }
-      ],
-      tabIndex: 2
+      isCollapse: true
     };
   },
   mounted () {
@@ -92,6 +119,18 @@ export default {
     handleClose (key, keyPath) {
       console.log(key, keyPath);
     },
+    handleSelect (key, keyPath, item, routeResult) {
+      let title = ''
+      dict.forEach(ele => {
+        if (ele.path === key) {
+          title = ele.name
+        }
+      })
+      this.$store.commit('PUSH_NAVBARLIST', {
+        title,
+        path: key
+      })
+    },
     init () {
       // getData().then(res => {
       //   console.log(res, 111);
@@ -103,7 +142,6 @@ export default {
 <style lang="less" scoped>
 .system-menu {
   width: 6.4rem;
-  height: calc(100vh - 8.7rem);
   background-color: #1f7c73;
   overflow: hidden;
   .menu {
@@ -126,6 +164,16 @@ export default {
     }
     .menu-icon-font {
       font-size: 2rem;
+    }
+    .menu-title {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      .title-name {
+        font-size: 1.4rem;
+        line-height: 1.4rem;
+      }
     }
   }
 }

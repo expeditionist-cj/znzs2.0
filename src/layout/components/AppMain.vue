@@ -11,7 +11,10 @@
 </template>
 <style lang="less" scoped>
 .AppMain {
-  width: calc(100% - 8.2rem);
-  padding: 0 0.5rem;
+  width: calc(100% - 6.4rem);
+  height: calc(100vh - 9.6rem);
+  padding: 0.5rem;
+  background-color: #E7F1E5;
+  overflow: hidden;
 }
 </style>

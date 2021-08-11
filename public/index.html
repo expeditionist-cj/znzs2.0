@@ -8,18 +8,7 @@
   <link rel="icon" href="<%= BASE_URL %>favicon.ico">
   <title>
     <%= htmlWebpackPlugin.options.title %>
-  </title>
-  <style>
-    html,
-    body,
-    #app {
-      height: 100%;
-      background: #fff;
-      margin: 0;
-      padding: 0;
-      color: #000;
-    }
-  </style>
+  </title> 
 </head>
 
 <body>
@@ -28,7 +17,6 @@
         Please enable it to continue.</strong>
   </noscript>
   <div id="app">
-    <canvas id="canvas" width="2560" height="1000" style="min-width: 1000px; width: 100%; position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%)"></canvas>
   </div>
   <script src="<%= BASE_URL %>util/aes.js" charset="utf-8"></script>
   <script src="<%= BASE_URL %>util/crypto-js.js" charset="utf-8"></script>

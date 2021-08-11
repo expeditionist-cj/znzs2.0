@@ -9,7 +9,7 @@ module.exports = {
   indexPath: 'index.html',
   filenameHashing: true,
   lintOnSave: true,
-  runtimeCompiler: false,
+  runtimeCompiler: true,
   transpileDependencies: [],
   productionSourceMap: false,
   integrity: false,
@@ -37,6 +37,13 @@ module.exports = {
         ws: true,
         pathRewrite: {
           '^/auth': '/auth'
+        }
+      },
+      '/model': {
+        target: settings.proxyUrl,
+        ws: true,
+        pathRewrite: {
+          '^/model': '/model'
         }
       },
       '/admin': {

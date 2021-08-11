@@ -9,8 +9,8 @@ const routes = [
     children: [
       {
         path: '/',
-        name: 'home',
-        component: () => import(/* webpackChunkName: "home" */ '@/views/home/index.vue')
+        name: 'dashboard',
+        component: () => import(/* webpackChunkName: "dashboard" */ '@/views/dashboard/index.vue')
       },
       {
         path: '/application',
@@ -20,12 +20,56 @@ const routes = [
       {
         path: '/datas',
         name: 'datas',
-        component: () => import(/* webpackChunkName: "datas" */ '@/views/datas/index.vue')
+        component: () => import(/* webpackChunkName: "datas" */ '@/views/datas/index.vue'),
+        children: [
+          {
+            path: '/datas/home',
+            name: 'home',
+            component: () => import(/* webpackChunkName: "home" */ '@/views/datas/components/datasHome.vue')
+          },
+          {
+            path: '/datas/monitoring',
+            name: 'monitoring',
+            component: () => import(/* webpackChunkName: "monitoring" */ '@/views/datas/components/monitoring.vue')
+          },
+          {
+            path: '/datas/dataBinding',
+            name: 'dataBinding',
+            component: () => import(/* webpackChunkName: "dataBinding" */ '@/views/datas/components/dataBinding.vue')
+          },
+          {
+            path: '/datas/dataSourceConfiguration',
+            name: 'dataSourceConfiguration',
+            component: () => import(/* webpackChunkName: "dataSourceConfiguration" */ '@/views/datas/components/dataSourceConfiguration.vue')
+          },
+          {
+            path: '/datas/dataStandardization',
+            name: 'dataStandardization',
+            component: () => import(/* webpackChunkName: "dataStandardization" */ '@/views/datas/components/dataStandardization.vue')
+          },
+          {
+            path: '/datas/dataSupplement',
+            name: 'dataSupplement',
+            component: () => import(/* webpackChunkName: "dataSupplement" */ '@/views/datas/components/dataSupplement.vue')
+          }
+        ]
       },
       {
         path: '/appStore',
         name: 'appStore',
-        component: () => import(/* webpackChunkName: "appStore" */ '@/views/appStore/index.vue')
+        component: () => import(/* webpackChunkName: "appStore" */ '@/views/appStore/index.vue'),
+        children: [
+          {
+            path: '/appStore/appHome',
+            name: 'appHome',
+            component: () => import(/* webpackChunkName: "appHome" */ '@/views/appStore/components/appHome.vue')
+          },
+          {
+            path: '/appStore/appDetails',
+            name: 'appDetails',
+            component: () => import(/* webpackChunkName: "appDetails" */ '@/views/appStore/components/appDetails.vue')
+          }
+        ]
       },
       {
         path: '/settings',
@@ -67,6 +111,7 @@ const router = createRouter({
   history: createWebHashHistory(),
   routes
 })
+// 路由拦截
 router.beforeEach((to, from, next) => {
   const token = JSON.parse(window.sessionStorage.getItem('session')).user['access_token']
   if (to.path === '/login' || token) {

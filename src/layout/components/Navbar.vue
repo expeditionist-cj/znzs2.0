@@ -9,7 +9,6 @@
         >
         <div class="line"></div>
         <div class="plant-name">{{ plantName }}</div>
-
       </div>
       <div class="nav-head-right">
         <div class="nav-head-right-top">
@@ -26,16 +25,17 @@
           <div class="nav-head-right-bottom-skew">
             <div class="nav-head-right-bottom-skew-child">
               <el-tabs
-                v-model="editableTabsValue"
+                v-model="active"
                 type="card"
                 editable
-                @edit="handleTabsEdit"
+                @tab-click="clickBar"
+                @tab-remove="removeTab"
               >
                 <el-tab-pane
-                  v-for="(item, index) in editableTabs"
+                  v-for="(item, index) in navbarList"
                   :key="index"
                   :label="item.title"
-                  :name="item.name"
+                  :name="item.path"
                 >
                 </el-tab-pane>
               </el-tabs>
@@ -44,59 +44,48 @@
         </div>
       </div>
     </div>
-
   </div>
 </template>
-
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'Navbar',
-  components: {
-
-  },
   data () {
     return {
       userName: '陈绩',
       plantName: '新昌电厂',
-      editableTabsValue: '1',
-      editableTabs: [
-        {
-          title: 'Tab 1',
-          name: '1',
-          content: 'Tab 1 content'
-        },
-        {
-          title: 'Tab 2',
-          name: '2',
-          content: 'Tab 2 content'
-        },
-        {
-          title: 'Tab 3',
-          name: '3',
-          content: 'Tab 3 content'
-        },
-        {
-          title: 'Tab 4',
-          name: '4',
-          content: 'Tab 4 content'
-        }
-      ]
+      active: ''
     };
   },
+  computed: {
+    ...mapState({
+      navbarList: state => state.application.navbarList,
+      activeBar: state => state.application.activeBar
+    })
+  },
+  watch: {
+    activeBar(value) {
+      this.active = value
+      this.$router.push({ path: value })
+    },
+    active(value) {
+      this.$store.commit('SET_ACTIVEBAR', value)
+    }
+  },
+  mounted() {
+    this.active = this.activeBar
+  },
   methods: {
-    handleOpen (key, keyPath) {
-      console.log(key, keyPath);
-    },
-    handleClose (key, keyPath) {
-      console.log(key, keyPath);
-    },
     onExit () {
       this.$store.dispatch('LogOut').then(() => {
         this.$router.push({ path: '/login' });
       });
     },
-    handleTabsEdit() {
-
+    clickBar (tab, event) {
+      this.$router.push({ path: tab.props.name })
+    },
+    removeTab(targetName) {
+      this.$store.commit('REMOVE_NAVBARLIST', targetName)
     }
   }
 }

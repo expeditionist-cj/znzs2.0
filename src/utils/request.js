@@ -101,16 +101,20 @@ service.interceptors.response.use((response) => {
   let msg = ''
   if (status < 200 || status >= 300) {
     msg = showStatus(status)
-    if (typeof response.data === 'string') {
-      response.data = { msg }
-    } else {
-      response.data.msg = msg
+    if (response.data.code === 1) {
+      msg = response.data.msg
     }
+    // if (typeof response.data === 'string') {
+    //   response.data = { msg }
+    // } else {
+    //   response.data.msg = msg
+    // }
+    return Promise.reject(new Error(msg))
   }
   return response
 }, (error) => {
   error.data = {}
   error.data.msg = '请求超时或服务器异常，请检查网络或联系管理员！'
-  return Promise.resolve(error)
+  return Promise.reject(new Error(error))
 })
 export default service

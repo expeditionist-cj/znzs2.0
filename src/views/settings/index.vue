@@ -12,7 +12,7 @@
             v-for="(itm,idx) in item.children"
             :key="idx"
             class="box"
-            :class="{active: item.component === activePage}"
+            :class="{active: itm.component === activePage}"
             @click="onCheck(itm)"
           >
             <!-- <i :class="itm.iconClass"></i> -->
@@ -45,7 +45,7 @@
   </div>
 </template>
 <script>
-import settingsMenu from '@/utils/settingsMenu'
+import settingsMenu from '@/config/settingsMenu'
 import { mapState } from 'vuex'
 export default {
   data () {
@@ -70,7 +70,10 @@ export default {
   }
 }
 </script>
+
 <style lang="less" scoped>
+@import '../../styles/common.less';
+
 .settings {
   width: 100%;
   height: 100%;
@@ -100,7 +103,8 @@ export default {
             margin-bottom: 0.2rem;
           }
           &:hover {
-            color: #54d887;
+            color: @activeColor;
+            background-color: @activeBgColor;
           }
           .box-icon-font {
             font-size: 2rem;
@@ -108,8 +112,8 @@ export default {
           }
         }
         .active {
-          color: #3ad954;
-          background-color: #0f0f0f;
+          color: @activeColor;
+          background-color: @activeBgColor;
         }
       }
     }
