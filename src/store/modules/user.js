@@ -3,7 +3,9 @@ import { encryption } from '@/utils/util'
 const user = {
   state: {
     user_id: '',
-    access_token: ''
+    access_token: '',
+    plantName: '新昌电厂',
+    plantCode: 'XCXM'
   },
   mutations: {
     SET_USER_ID: (state, userId) => {

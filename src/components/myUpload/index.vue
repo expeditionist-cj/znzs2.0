@@ -4,20 +4,8 @@
       :model-value="importExcelDialogVisible"
       :before-close="beforeClose"
       title="导入excel"
-      width="60%"
+      width="30%"
     >
-      <!-- <div style="width:50%;margin-bottom:20px">
-      <el-date-picker
-        v-model.number="importExcelTime"
-        align="right"
-        type="month"
-        placeholder="选择上传日期"
-        size="small"
-        :clearable="false"
-        :editable="false"
-        :picker-options="importExcelDataPickerOptions"
-      ></el-date-picker>
-    </div> -->
       <el-upload
         ref="upload"
         class="upload-demo"
@@ -27,21 +15,21 @@
         :on-change="changeFile"
         :auto-upload="false"
       >
-        <template #trigger>
-          <el-button size="small" type="primary">选取文件</el-button>
-        </template>
-        <template #tip>
+        <!-- <template #trigger> -->
+        <el-button size="mini" type="success">选取文件</el-button>
+        <!-- </template> -->
+        <!-- <template #tip>
           <div class="el-upload__tip">
             Excel文件，且不超过500kb
           </div>
-        </template>
+        </template> -->
       </el-upload>
       <template #footer>
         <span class="dialog-footer">
-          <el-button type="primary" size="small" @click="onCloseDialog">取 消</el-button>
+          <el-button size="mini" @click="onCloseDialog">取 消</el-button>
           <el-button
-            size="small"
-            type="primary"
+            size="mini"
+            type="success"
             :loading="submitLoading"
             @click="submitUpload"
           >上传文件</el-button>
@@ -80,7 +68,7 @@ export default {
           return time.getTime() > Date.now();
         }
       },
-      formData: new FormData()
+      file: null
     };
   },
   computed: {},
@@ -96,8 +84,7 @@ export default {
     },
     // 文件改变时触发
     changeFile(file) {
-      this.formData.delete('file');
-      this.formData.append('file', file.raw);
+      this.file = file
     },
     // 上传文件
     submitUpload() {
@@ -105,7 +92,8 @@ export default {
         this.$message.info('请选择要上传的文件');
         return false;
       }
-      this.$emit('submitUpload', this.formData);
+      console.log(this.file, 30)
+      this.$emit('submitUpload', this.file);
     },
     beforeClose(done) {
       this.$emit('changeImportExcelDialogVisible', false);
@@ -123,20 +111,20 @@ export default {
 
 <style lang="less">
 .myUpload-wrap {
-  .el-dialog, .el-pager li{
-    background-color: #263553!important;
-  }
-  .el-dialog__title{
-    color: rgba(255,255,255,0.9);
-  }
-  .el-upload__tip{
-    color: rgba(255,255,255,0.9);
-  }
-  .el-upload-list__item-name{
-    color: rgba(255,255,255,0.9);
-  }
-  .el-upload-list__item:hover{
-    background-color: rgba(255,255,255,0.4);
-  }
+  // .el-dialog, .el-pager li{
+  //   background-color: #263553!important;
+  // }
+  // .el-dialog__title{
+  //   color: rgba(255,255,255,0.9);
+  // }
+  // .el-upload__tip{
+  //   color: rgba(255,255,255,0.9);
+  // }
+  // .el-upload-list__item-name{
+  //   color: rgba(255,255,255,0.9);
+  // }
+  // .el-upload-list__item:hover{
+  //   background-color: rgba(255,255,255,0.4);
+  // }
 }
 </style>

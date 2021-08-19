@@ -15,7 +15,7 @@
         >
           <div class="model-box">
             <img
-              :src="item.modelIcon ? require(`../../assets/images/${item.modelIcon}.png`) : require('../../assets/images/defaultDevice.png')"
+              :src="item.cover_img ? require(`../../assets/images/${item.cover_img}`) : require('../../assets/images/shop/cover/chj.png')"
               alt=""
               @click="toAppDetails"
             >
@@ -99,12 +99,11 @@ export default {
           height: 15.2rem;
           background-color: #e9eef3;
           border-radius: 1rem;
-          margin: 2.7rem 2rem;
+          margin: 1.7rem 2rem;
           box-shadow: 0.1rem 0.1rem 0.5rem #e9eef3;
           text-align: center;
           img {
-            width: 14.3rem;
-            margin-top: 1.25rem;
+            width: 100%;
           }
           &:hover {
             transform: scale(1.02, 1.02);
@@ -114,7 +113,7 @@ export default {
           display: flex;
           .model-text {
             width: 80%;
-            margin: 0 2rem 0.7rem;
+            margin: 0 2rem;
             font-family: PingFangSC-Semibold, PingFang SC;
             .title {
               font-size: 1.6rem;
@@ -151,7 +150,7 @@ export default {
         }
         .model-mid {
           margin-left: 2rem;
-          /deep/.el-rate__icon {
+          :deep(.el-rate__icon) {
             margin-right: 0;
           }
         }
@@ -172,5 +171,6 @@ export default {
       }
     }
   }
+
 }
 </style>

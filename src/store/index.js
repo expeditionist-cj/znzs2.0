@@ -17,11 +17,14 @@ const store = new Vuex.Store({
   plugins: [
     vuejsStorage({
       keys: [
+        'user.plantName',
+        'user.plantCode',
         'user.user_id',
         'user.access_token',
         'application.navbarList',
         'application.routeParams',
-        'application.activeBar'
+        'application.activeBar',
+        'application.query'
       ],
       // keep state.count in localStorage
       namespace: 'session',

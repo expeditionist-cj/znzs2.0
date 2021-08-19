@@ -5,6 +5,7 @@ const application = {
       path: '/'
     }],
     activeBar: '/',
+    query: {},
     routeParams: {}
   },
   mutations: {
@@ -14,6 +15,9 @@ const application = {
       // 去重
       const arr = [...new Set(list.map(val => JSON.stringify(val)))].map(val => JSON.parse(val))
       state.navbarList = arr
+      if (listItem.query) {
+        state.query = listItem.query
+      }
       state.activeBar = listItem.path
     },
     SET_NAVEBARLIST(state, navbarList) {

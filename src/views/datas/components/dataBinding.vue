@@ -7,7 +7,7 @@
       <div class="nav">
         <div class="nav-left">
           <el-input
-            v-model="pointName"
+            v-model="keyWords"
             class="ipt"
             size="mini"
             placeholder="请输入“测点编码/描述/类型/单位/系统名称”"
@@ -17,6 +17,7 @@
             class="btn"
             size="mini"
             icon="el-icon-search"
+            @click="init"
           >查询</el-button>
           <el-button
             type="success"
@@ -61,37 +62,37 @@
           >
           </el-table-column>
           <el-table-column
-            prop="name"
+            prop="pointCode"
             label="测点编码"
             align="center"
           >
           </el-table-column>
           <el-table-column
-            prop="name"
+            prop="type"
             label="类型"
             align="center"
           >
           </el-table-column>
           <el-table-column
-            prop="name"
+            prop="dimension"
             label="单位"
             align="center"
           >
           </el-table-column>
           <el-table-column
-            prop="name"
+            prop="pointName"
             label="测点描述"
             align="center"
           >
           </el-table-column>
           <el-table-column
-            prop="name"
+            prop="mainSystem"
             label="主系统"
             align="center"
           >
           </el-table-column>
           <el-table-column
-            prop="name"
+            prop="subSystem"
             label="子系统"
             align="center"
           >
@@ -112,6 +113,8 @@
           background
           layout="prev, pager, next"
           :total="total"
+          :page-size="size"
+          :current-page="current"
         >
         </el-pagination>
       </div>
@@ -123,7 +126,7 @@
       :title="dialogTitle"
       width="30%"
     >
-      <span>需要注意的是内容是默认不居中的</span>
+
       <template #footer>
         <span class="dialog-footer">
           <el-button @click="centerDialogVisible = false">取 消</el-button>
@@ -135,118 +138,51 @@
 </template>
 
 <script>
+import { getDataByPage } from '@/api/datas/dataBinding'
 export default {
   data () {
     return {
       dialogTitle: '新增',
       centerDialogVisible: false,
-      resource: '',
-      dataResource: [
-        {
-          value: '22',
-          label: '11'
-        }
-      ],
-      quality: '',
-      dataQuality: [
-        {
-          value: '22',
-          label: '11'
-        }
-      ],
-      pointName: '',
-      numb: {
-        total: 572,
-        good: 482,
-        bad: 4,
-        timeout: 1
-      },
-      tableData: [
-        {
-          name: 1
-        },
-        {
-          name: 1
-        },
-        {
-          name: 1
-        },
-        {
-          name: 1
-        },
-        {
-          name: 1
-        },
-        {
-          name: 1
-        },
-        {
-          name: 1
-        },
-        {
-          name: 1
-        },
-        {
-          name: 1
-        },
-        {
-          name: 1
-        },
-        {
-          name: 1
-        },
-        {
-          name: 1
-        },
-        {
-          name: 1
-        },
-        {
-          name: 1
-        },
-        {
-          name: 1
-        },
-        {
-          name: 1
-        },
-        {
-          name: 1
-        },
-        {
-          name: 1
-        },
-        {
-          name: 1
-        },
-        {
-          name: 1
-        },
-        {
-          name: 1
-        },
-        {
-          name: 1
-        },
-        {
-          name: 1
-        },
-        {
-          name: 1
-        },
-        {
-          name: 1
-        },
-        {
-          name: 1
-        }
-      ],
-      total: 1000 // 分页总个数
+      keyWords: '',
+      tableData: [],
+      current: 1,
+      size: 20,
+      total: 0 // 分页总个数
     }
   },
+  mounted() {
+    this.init()
+  },
   methods: {
+    init() {
+      getDataByPage({
+        current: this.current,
+        size: this.size,
+        keyWords: this.keyWords
+      }).then(res => {
+        console.log(res, 200);
+        if (res.data.data) {
+          const { total, records } = res.data.data
+          this.total = total
+          this.tableData = records
+        }
+      })
+    },
     doAdd() {
-      this.centerDialogVisible = true
+      // this.centerDialogVisible = true
+    },
+    // 修改
+    doEdit (row) {
+      // updateData(row).then(res => {
+      //   console.log(res);
+      // })
+    },
+    // 删除
+    doDelete (row) {
+      // delData(row.id).then(res => {
+      //   console.log(res);
+      // })
     }
   }
 }
@@ -285,7 +221,7 @@ export default {
     }
     .dataBinding-table {
       margin-top: 1rem;
-      /deep/.el-button {
+      :deep(.el-button) {
         border: 0;
       }
     }

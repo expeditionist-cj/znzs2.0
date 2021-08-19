@@ -27,11 +27,13 @@ module.exports = {
   devServer: {
     port: settings.port,
     open: true,
+    hot: true,
     overlay: {
       warnings: false,
       errors: true
     },
-    proxy: { // 登陆
+    proxy: {
+      // 登陆
       '/auth': {
         target: settings.proxyUrl,
         ws: true,
@@ -39,6 +41,7 @@ module.exports = {
           '^/auth': '/auth'
         }
       },
+      // 模型
       '/model': {
         target: settings.proxyUrl,
         ws: true,
@@ -46,13 +49,23 @@ module.exports = {
           '^/model': '/model'
         }
       },
+      // 后台
       '/admin': {
         target: settings.proxyUrl,
         ws: true,
         pathRewrite: {
           '^/admin': '/admin'
         }
+      },
+      // 数据标准化配置管理
+      '/data': {
+        target: settings.proxyUrl,
+        ws: true,
+        pathRewrite: {
+          '^/data': '/data'
+        }
       }
+
     }
   }
 }

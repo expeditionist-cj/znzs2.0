@@ -4,7 +4,7 @@
       <div class="appDetails-left-img">
         <div class="img-box">
           <img
-            :src="require(`../../../assets/images/${routeParams.icon || 'defaultDevice'}.png`)"
+            :src="require(`../../../assets/images/${routeParams.icon || 'shop/cover/no_pic'}.png`)"
             alt=""
           >
         </div>
@@ -52,8 +52,8 @@
               v-for="(item,index) in imgList"
               :key="index"
               class="img-item"
-              :src="require(`../../../assets/images/${item.imgUrl}.png`)"
-              :preview-src-list="[require(`../../../assets/images/${item.imgUrl}.png`)]"
+              :src="require(`../../../assets/images/${item.imgUrl || 'shop/cover/no_pic'}.png`)"
+              :preview-src-list="[require(`../../../assets/images/${item.imgUrl || 'shop/cover/no_pic'}.png`)]"
             ></el-image>
           </div>
         </div>
@@ -78,13 +78,7 @@ export default {
       height: 'calc(100vh - 45.6rem)',
       suggestApps: [],
       star: 4.5,
-      imgList: [
-        { imgUrl: 'defaultDevice' },
-        { imgUrl: 'defaultDevice' },
-        { imgUrl: 'defaultDevice' },
-        { imgUrl: 'defaultDevice' },
-        { imgUrl: 'defaultDevice' }
-      ]
+      imgList: []
     }
   },
   computed: {
@@ -138,8 +132,8 @@ export default {
         box-shadow: 0.1rem 0.1rem 0.5rem #e9eef3;
         text-align: center;
         img {
-          width: 14.3rem;
-          margin-top: 1.25rem;
+          width: 100%;
+          height: 100%;
         }
         &:hover {
           transform: scale(1.02, 1.02);

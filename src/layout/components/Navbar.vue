@@ -53,14 +53,14 @@ export default {
   data () {
     return {
       userName: '陈绩',
-      plantName: '新昌电厂',
       active: ''
     };
   },
   computed: {
     ...mapState({
       navbarList: state => state.application.navbarList,
-      activeBar: state => state.application.activeBar
+      activeBar: state => state.application.activeBar,
+      plantName: state => state.user.plantName
     })
   },
   watch: {

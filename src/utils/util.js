@@ -35,4 +35,26 @@ export const encryption = (params) => {
   }
   return result
 }
-
+// 防抖，首次立即执行
+export function debounce(fn, delay = 1000) {
+  let timer = null;
+  let count = 0;
+  const self = this
+  return function () {
+    const args = [...arguments] // 取出参数
+    clearTimeout(timer) // 先清除定时器
+    if (!count) { // 第一次点击的时候
+      count++
+      fn.apply(self, args)
+      timer = setTimeout(() => {
+        count = 0;
+      }, delay)
+    } else {
+      count++
+      timer = setTimeout(() => {
+        fn.apply(self, args)
+        count = 0;
+      }, delay)
+    }
+  }
+}

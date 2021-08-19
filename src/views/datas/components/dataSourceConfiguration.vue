@@ -155,7 +155,7 @@ export default {
     }
     .dataSourceConfiguration-table {
       margin-top: 1rem;
-      /deep/.el-button {
+      :deep(.el-button) {
         border: 0;
       }
     }

@@ -1,7 +1,7 @@
 
 import axios from 'axios'
 // 创建axios实例
-const proUrl = '/assistant'
+const proUrl = '/api'
 const devUrl = '/'
 const service = axios.create({
   baseURL: process.env.NODE_ENV === 'production' ? proUrl : devUrl,

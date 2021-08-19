@@ -47,20 +47,21 @@
             class="btn"
             size="mini"
             icon="el-icon-search"
+            @click="init"
           >查询</el-button>
-          <el-button
+          <!-- <el-button
             type="success"
             class="btn"
             size="mini"
             icon="el-icon-download"
-          >导出</el-button>
+          >导出</el-button> -->
         </div>
-        <div class="nav-right">
+        <!-- <div class="nav-right">
           在线测点总数：<span class="normal">{{ numb.total }}</span>&nbsp;&nbsp;
           数据良好： <span class="good">{{ numb.good }}</span>&nbsp;&nbsp;
           坏点数量： <span class="bad">{{ numb.bad }}</span>&nbsp;&nbsp;
           数据超时： <span class="timeout">{{ numb.timeout }}</span>
-        </div>
+        </div> -->
       </div>
       <div class="monitoring-table">
         <el-table
@@ -78,49 +79,49 @@
           >
           </el-table-column>
           <el-table-column
-            prop="name"
+            prop="stdCode"
             label="点名"
             align="center"
           >
           </el-table-column>
           <el-table-column
-            prop="name"
+            prop="type"
             label="类型"
             align="center"
           >
           </el-table-column>
           <el-table-column
-            prop="name"
+            prop="val"
             label="最后更新值"
             align="center"
           >
           </el-table-column>
           <el-table-column
-            prop="name"
+            prop="dimension"
             label="单位"
             align="center"
           >
           </el-table-column>
           <el-table-column
-            prop="name"
+            prop="stdName"
             label="描述"
             align="center"
           >
           </el-table-column>
           <el-table-column
-            prop="name"
+            prop="quality"
             label="质量"
             align="center"
           >
           </el-table-column>
           <el-table-column
-            prop="name"
+            prop="time"
             label="最后更新时间"
             align="center"
           >
           </el-table-column>
           <el-table-column
-            prop="name"
+            prop="protocolName"
             label="归属数采服务"
             align="center"
           >
@@ -129,6 +130,13 @@
             label="操作"
             align="center"
           >
+            <template #default="scope">
+              <el-button
+                type="text"
+                size="mini"
+                @click="lookDiagram(scope.row)"
+              >曲线</el-button>
+            </template>
           </el-table-column>
         </el-table>
       </div>
@@ -137,6 +145,8 @@
           background
           layout="prev, pager, next"
           :total="total"
+          :page-size="size"
+          :current-page="current"
         >
         </el-pagination>
       </div>
@@ -145,6 +155,7 @@
 </template>
 
 <script>
+import { getDataByPage } from '@/api/datas/monitoring'
 export default {
   data () {
     return {
@@ -163,94 +174,36 @@ export default {
         }
       ],
       pointName: '',
-      numb: {
-        total: 572,
-        good: 482,
-        bad: 4,
-        timeout: 1
-      },
-      tableData: [
-        {
-          name: 1
-        },
-        {
-          name: 1
-        },
-        {
-          name: 1
-        },
-        {
-          name: 1
-        },
-        {
-          name: 1
-        },
-        {
-          name: 1
-        },
-        {
-          name: 1
-        },
-        {
-          name: 1
-        },
-        {
-          name: 1
-        },
-        {
-          name: 1
-        },
-        {
-          name: 1
-        },
-        {
-          name: 1
-        },
-        {
-          name: 1
-        },
-        {
-          name: 1
-        },
-        {
-          name: 1
-        },
-        {
-          name: 1
-        },
-        {
-          name: 1
-        },
-        {
-          name: 1
-        },
-        {
-          name: 1
-        },
-        {
-          name: 1
-        },
-        {
-          name: 1
-        },
-        {
-          name: 1
-        },
-        {
-          name: 1
-        },
-        {
-          name: 1
-        },
-        {
-          name: 1
-        },
-        {
-          name: 1
-        }
-      ],
-      total: 1000 // 分页总个数
+      // numb: {
+      //   total: 572,
+      //   good: 482,
+      //   bad: 4,
+      //   timeout: 1
+      // },
+      tableData: [],
+      current: 1,
+      size: 20,
+      total: 0 // 分页总个数
     }
+  },
+  mounted() {
+    this.init()
+  },
+  methods: {
+    init() {
+      getDataByPage({
+        current: this.current,
+        size: this.size,
+        protocolCode: this.resource
+      }).then(res => {
+        if (res.data.data) {
+          const { total, records } = res.data.data
+          this.total = total
+          this.tableData = records
+        }
+      })
+    },
+    lookDiagram() {}
   }
 }
 </script>
@@ -287,15 +240,11 @@ export default {
         }
         .resource {
           width: 14.4rem;
-          /deep/.el-input {
-            line-height: 3rem;
-          }
+
         }
         .quality {
           width: 10.4rem;
-          /deep/.el-input {
-            line-height: 3rem;
-          }
+
         }
         .ipt {
           margin-left: 0.5rem;

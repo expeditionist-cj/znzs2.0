@@ -120,8 +120,8 @@ export default {
     return {
       // showBtn: false,
       loginForm: {
-        username: '', // 默认登录时的用户名和密码
-        password: '',
+        username: 'admin', // 默认登录时的用户名和密码
+        password: '123456',
         code: '',
         redomStr: ''
       },
@@ -460,6 +460,8 @@ export default {
     width: 84.9rem;
     height: 35.6rem;
     background: url("../../assets/images/login-bg.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
     position: relative;
     z-index: 2;
     top: 20%;
@@ -507,8 +509,11 @@ export default {
       .el-form-item {
         z-index: 20;
         margin: 0 1rem 3rem;
-        /deep/input::-webkit-input-placeholder {
+        :deep(input::-webkit-input-placeholder) {
           color: rgba(255, 255, 255, 0.5) !important;
+        }
+        :deep(.el-input) {
+          line-height: 4rem;
         }
       }
       .save-pwd {
@@ -525,7 +530,7 @@ export default {
       .login-submit {
         width: 100%;
       }
-      /deep/.el-button--success {
+      :deep(.el-button--success) {
         color: #1e705a;
         background-color: rgba(108, 233, 157, 1);
       }

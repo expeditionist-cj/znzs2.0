@@ -23,7 +23,7 @@
             </div>
           </div>
         </el-menu-item>
-        <el-menu-item index="/application">
+        <el-menu-item index="/application/applicationHome">
           <div class="menu-title">
             <svg
               class="icon menu-icon-font"
@@ -88,7 +88,7 @@ const dict = [
     path: '/'
   }, {
     name: '应用',
-    path: '/application'
+    path: '/application/applicationHome'
   },
   {
     name: '数据',

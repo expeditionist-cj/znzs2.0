@@ -15,7 +15,19 @@ const routes = [
       {
         path: '/application',
         name: 'application',
-        component: () => import(/* webpackChunkName: "application" */ '@/views/application/index.vue')
+        component: () => import(/* webpackChunkName: "application" */ '@/views/application/index.vue'),
+        children: [
+          {
+            path: '/application/applicationHome',
+            name: 'applicationHome',
+            component: () => import(/* webpackChunkName: "applicationHome" */ '@/views/application/components/applicationHome.vue')
+          },
+          {
+            path: '/application/particulars',
+            name: 'particulars',
+            component: () => import(/* webpackChunkName: "particulars" */ '@/views/application/components/particulars.vue')
+          }
+        ]
       },
       {
         path: '/datas',

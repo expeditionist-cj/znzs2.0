@@ -1,23 +1,23 @@
 <template>
   <div class="appStore">
     <div class="appStore-left">
-      <div class="appStore-title">
+      <!-- <div class="appStore-title">
         <div>商城共 <span class="total">{{ countData.total }}</span> 个模型/应用，已获取 <span class="redColor">{{ countData.purchased }}</span> 个，已试用 <span class="redColor">{{ countData.tried }}</span> 个</div>
-      </div>
+      </div> -->
       <div class="appStore-content">
         <el-carousel
           class="appStore-carousel"
           :interval="4000"
           type="card"
-          height="25rem"
+          height="27rem"
         >
           <el-carousel-item
-            v-for="item in options"
+            v-for="item in options.length>0? options:3"
             :key="item"
           >
             <img
               class="carousel-image"
-              src="../../../assets/images/login-bg.png"
+              :src="item.banner_img ? require(`../../../assets/images/${item.banner_img}`) : require('../../../assets/images/shop/cover/no_pic.png')"
               alt=""
             >
           </el-carousel-item>
@@ -31,7 +31,7 @@
             >
               <div class="model-box">
                 <img
-                  :src="item.modelIcon ? require(`../../../assets/images/${item.modelIcon}.png`) : require('../../../assets/images/defaultDevice.png')"
+                  :src="item.cover_img ? require(`../../../assets/images/${item.cover_img}`) : require('../../../assets/images/shop/cover/no_pic.png')"
                   alt=""
                   @click="toAppDetails(item)"
                 >
@@ -83,7 +83,7 @@ export default {
   },
   data () {
     return {
-      height: 'calc(100vh - 45.6rem)',
+      height: 'calc(100vh - 43.6rem)',
       suggestApps: [],
       commoditys: [],
       options: [],
@@ -107,7 +107,9 @@ export default {
           const { countData, list, turns } = res.data.data
           this.countData = countData
           this.commoditys = list
-          this.options = turns
+          this.$nextTick(() => {
+            this.options = turns
+          })
         }
       })
     },
@@ -149,11 +151,28 @@ export default {
       background-color: #fff;
       border-radius: 0.4rem;
       padding: 2rem;
+      :deep(.el-carousel--horizontal) {
+        overflow: visible;
+      }
+      :deep(.el-carousel__arrow) {
+        background-color: transparent;
+        font-size: 4rem;
+        height: 5rem;
+        width: 5rem;
+        color: rgba(43, 49, 61, 20%);
+      }
+      :deep(.el-carousel__arrow--left) {
+        transform: translate(-11rem, -2rem);
+      }
+      :deep(.el-carousel__arrow--right) {
+        transform: translate(11rem, -2rem);
+      }
       .appStore-carousel {
         width: 80%;
         margin: 0 auto;
       }
       .carousel-image {
+        border-radius: 2rem;
         width: 100%;
         height: 100%;
       }
@@ -163,18 +182,21 @@ export default {
         justify-content: space-between;
         .model {
           width: 24%;
-          height: 29.5rem;
+          height: 28.5rem;
+          border: 0.1rem dotted #ccd5de;
+          border-radius: 1.5rem;
+          margin-bottom: 1rem;
           .model-box {
             cursor: pointer;
-            height: 15.2rem;
+            height: 16.2rem;
             background-color: #e9eef3;
             border-radius: 1rem;
-            margin: 2.7rem 2rem;
+            margin: 0.7rem 2rem;
             box-shadow: 0.1rem 0.1rem 0.5rem #e9eef3;
             text-align: center;
             img {
-              width: 14.3rem;
-              margin-top: 1.25rem;
+              width: 100%;
+              height: 100%;
             }
             &:hover {
               transform: scale(1.02, 1.02);
@@ -184,7 +206,7 @@ export default {
             display: flex;
             .model-text {
               width: 80%;
-              margin: 0 2rem 0.7rem;
+              margin: 0 2rem;
               font-family: PingFangSC-Semibold, PingFang SC;
               .title {
                 font-size: 1.6rem;
@@ -225,7 +247,7 @@ export default {
           }
           .model-mid {
             margin-left: 2rem;
-            /deep/.el-rate__icon {
+            :deep(.el-rate__icon) {
               margin-right: 0;
             }
           }
@@ -238,10 +260,10 @@ export default {
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
-            &:hover {
-              white-space: normal;
-              overflow: overlay;
-            }
+            // &:hover {
+            //   white-space: normal;
+            //   overflow: overlay;
+            // }
           }
         }
       }

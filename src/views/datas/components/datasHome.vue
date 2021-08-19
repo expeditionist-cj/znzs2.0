@@ -24,24 +24,44 @@
           </div>
           <div class="top-content-img">
             <div class="points">
-              <div
-                v-for="(item,index) in points"
-                :key="index"
-                class="points-box"
-              >
+              <div class="points-box">
                 <div class="numb">
-                  {{ item.value }}
+                  {{ points.pointTotal|| 0 }}
                 </div>
                 <div class="name">
-                  {{ item.name }}
+                  测点总量
+                </div>
+              </div>
+              <div class="points-box">
+                <div class="numb">
+                  {{ points.pointOnline|| 0 }}
+                </div>
+                <div class="name">
+                  在线测点数量
+                </div>
+              </div>
+              <div class="points-box">
+                <div class="numb">
+                  {{ points.pointTimeout || 0 }}
+                </div>
+                <div class="name">
+                  超时数量
+                </div>
+              </div>
+              <div class="points-box">
+                <div class="numb">
+                  {{ points.pointBad || 0 }}
+                </div>
+                <div class="name">
+                  坏点数量
                 </div>
               </div>
             </div>
             <div class="dataHomeImg">
-              <div class="data-top">23</div>
-              <div class="data-right">98K</div>
-              <div class="data-bottom">25</div>
-              <div class="data-left">41</div>
+              <div class="data-top">{{ points.totalClean || 0 }}</div>
+              <div class="data-right">{{ points.totalStorage || 0 }}</div>
+              <div class="data-bottom">{{ points.totalStandard || 0 }}</div>
+              <div class="data-left">{{ points.totalJoint || 0 }}</div>
             </div>
 
           </div>
@@ -72,43 +92,41 @@
             >
             </el-table-column>
             <el-table-column
-              prop="name"
+              prop="type"
               label="通讯类型"
               align="center"
             >
             </el-table-column>
             <el-table-column
-              prop="name"
               label="通讯地址"
               align="center"
+              min-width="100rem"
             >
+              <template #default="scope">
+                {{ scope.row.params ? JSON.parse(scope.row.params).host || '' : '' }}
+              </template>
             </el-table-column>
             <el-table-column
-              prop="name"
+              prop="status"
               label="通讯状态"
               align="center"
             >
             </el-table-column>
             <el-table-column
-              prop="name"
+              prop="pointCount"
               label="采集点位数量"
               align="center"
             >
             </el-table-column>
             <el-table-column
-              prop="name"
+              prop="rowCount"
               label="日数据采集量"
               align="center"
             >
             </el-table-column>
             <el-table-column
-              prop="name"
+              prop="duration"
               label="累计运行时长"
-              align="center"
-            >
-            </el-table-column>
-            <el-table-column
-              label="操作"
               align="center"
             >
             </el-table-column>
@@ -121,61 +139,83 @@
         <div class="msgs-title">
           实时消息
         </div>
-        <div
-          v-for="(item,index) in msgs"
-          :key="index"
-          class="msg-box"
-        >
-          <div class="top-msg">
-            <el-button
-              size="mini"
-              round
-              :type="item.level > 1? 'warning' : 'danger'"
-            >{{ item.level > 1? '超时' : '坏点' }}</el-button>
-            <div class="time">{{ item.time }}</div>
+        <el-scrollbar height="calc(100vh - 17rem)">
+          <div>
+            <div
+              v-for="(item,index) in msgs"
+              :key="index"
+              class="msg-box"
+            >
+              <div class="top-msg">
+                <el-button
+                  size="mini"
+                  round
+                  :type="item.level > 1? 'warning' : 'danger'"
+                >{{ item.level > 1? '超时' : '坏点' }}</el-button>
+                <div class="time">{{ item.time }}</div>
+              </div>
+              <div class="bottom-msg">
+                {{ item.message }}
+              </div>
+            </div>
           </div>
-          <div class="bottom-msg">
-            {{ item.message }}
-          </div>
-        </div>
+        </el-scrollbar>
       </div>
     </div>
   </div>
 </template>
 <script>
 import datasMenu from '@/config/datasMenu'
+import { getDataByPage } from '@/api/datas/dataSourceConfiguration'
+import { socketUrl } from '@/config/config'
 export default {
   data () {
     return {
       acctiveData: '',
       datasMenu,
-      tableData: [
-        {
-          name: '1'
-        },
-        {
-          name: '1'
-        }
-      ],
-      points: [
-        {
-          name: '测点总量',
-          value: '150'
-        },
-        {
-          name: '测点总量',
-          value: '150'
-        },
-        {
-          name: '测点总量',
-          value: '150'
-        },
-        {
-          name: '测点总量',
-          value: '150'
-        }
-      ],
+      tableData: [],
+      points: {},
       msgs: [
+        {
+          time: '2021/08/31 12:23:21',
+          level: 2,
+          message: '24:N:R:B_RP:3_D07:A5M #8炉B SCR反应器第2、3层催化剂间烟气压力'
+        },
+        {
+          time: '2021/08/31 12:23:21',
+          level: 1,
+          message: '24:N:R:B_RP:3_D07:A5M #8炉B SCR反应器第2、3层催化剂间烟气压力'
+        },
+        {
+          time: '2021/08/31 12:23:21',
+          level: 2,
+          message: '24:N:R:B_RP:3_D07:A5M #8炉B SCR反应器第2、3层催化剂间烟气压力'
+        },
+        {
+          time: '2021/08/31 12:23:21',
+          level: 1,
+          message: '24:N:R:B_RP:3_D07:A5M #8炉B SCR反应器第2、3层催化剂间烟气压力'
+        },
+        {
+          time: '2021/08/31 12:23:21',
+          level: 2,
+          message: '24:N:R:B_RP:3_D07:A5M #8炉B SCR反应器第2、3层催化剂间烟气压力'
+        },
+        {
+          time: '2021/08/31 12:23:21',
+          level: 1,
+          message: '24:N:R:B_RP:3_D07:A5M #8炉B SCR反应器第2、3层催化剂间烟气压力'
+        },
+        {
+          time: '2021/08/31 12:23:21',
+          level: 2,
+          message: '24:N:R:B_RP:3_D07:A5M #8炉B SCR反应器第2、3层催化剂间烟气压力'
+        },
+        {
+          time: '2021/08/31 12:23:21',
+          level: 1,
+          message: '24:N:R:B_RP:3_D07:A5M #8炉B SCR反应器第2、3层催化剂间烟气压力'
+        },
         {
           time: '2021/08/31 12:23:21',
           level: 2,
@@ -204,7 +244,19 @@ export default {
       ]
     }
   },
+  mounted() {
+    this.init()
+  },
   methods: {
+    init() {
+      this.initWebSocket()
+      getDataByPage().then(res => {
+        if (res.data.data) {
+          this.tableData = res.data.data
+        }
+      })
+    },
+    // 切换到子页面
     onCheck (item) {
       this.$store.commit('PUSH_NAVBARLIST', {
         title: item.title,
@@ -214,6 +266,42 @@ export default {
       //   path: item.path
       // })
       this.acctiveData = item.component
+    },
+    // 初始化weosocket
+    initWebSocket() {
+      const now = Date.now()
+      this.path = `/data/websocket/${this.plant || 'G3XM'}/${this.unit || null}/${now}`
+      if (this.websock) {
+        this.websock.close()
+      }
+      const wsuri = socketUrl + this.path
+      this.websock = new WebSocket(wsuri)
+      this.websock.onmessage = this.websocketonmessage
+      this.websock.onopen = this.websocketonopen
+      this.websock.onerror = this.websocketonerror
+      this.websock.onclose = this.websocketclose
+    },
+    // 连接建立之后执行send方法发送数据
+    websocketonopen() {
+      // let actions = { test: "12345" };
+      // this.websocketsend();
+    },
+    // 连接建立失败重连
+    websocketonerror() {
+      this.initWebSocket(this.path)
+    },
+    // 数据接收
+    websocketonmessage(e) {
+      const data = JSON.parse(e.data)
+      this.points = data
+    },
+    // 数据发送
+    websocketsend(Data) {
+      // this.websock.send(Data);
+    },
+    // 关闭连接
+    websocketclose(e) {
+      // console.log("断开连接", e);
     }
   }
 }
@@ -317,7 +405,7 @@ export default {
           .data-top {
             position: absolute;
             top: 9.5%;
-            left: 34%;
+            left: 32%;
             z-index: 2;
             font-size: 1.8rem;
             color: rgba(255, 211, 0, 1);
@@ -325,7 +413,7 @@ export default {
           .data-right {
             position: absolute;
             top: 30%;
-            left: 83%;
+            left: 82%;
             z-index: 2;
             font-size: 1.8rem;
             color: rgba(255, 211, 0, 1);
@@ -344,7 +432,7 @@ export default {
             font-size: 1.8rem;
             color: rgba(255, 211, 0, 1);
             top: 56.5%;
-            left: 21%;
+            left: 19%;
           }
         }
       }
@@ -363,8 +451,8 @@ export default {
         .el-table--mini {
           font-size: 1.2rem;
         }
-        /deep/.el-table--mini td,
-        /deep/.el-table--mini th {
+        :deep(.el-table--mini td),
+        :deep(.el-table--mini th) {
           padding: 0.6rem 0;
         }
       }
@@ -398,14 +486,14 @@ export default {
           justify-content: space-between;
           align-items: center;
 
-          /deep/.el-button--mini,
-          .el-button--mini.is-round {
+          :deep(.el-button--mini,
+          .el-button--mini.is-round) {
             padding: 0.3rem 0.9rem;
           }
-          /deep/.el-button.is-round {
+          :deep(.el-button.is-round) {
             border-radius: 2rem;
           }
-          /deep/.el-button {
+          :deep(.el-button) {
             min-height: 1rem;
             font-size: 1.2rem;
           }
