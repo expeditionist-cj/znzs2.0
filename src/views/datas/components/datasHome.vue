@@ -396,8 +396,8 @@ export default {
           .dataHomeImg {
             background: url("../../../assets/images/dataHome.png");
             background-size: 100% 100%;
-            width: 86.9rem;
-            height: 54rem;
+            width: 65%;
+            height: 86%;
             margin: 0 auto;
             position: relative;
             z-index: 1;

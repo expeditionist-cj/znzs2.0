@@ -7,7 +7,6 @@
       frameborder="0"
     ></iframe>
   </div>
-
 </template>
 <script>
 import { mapState } from 'vuex'
@@ -33,7 +32,7 @@ export default {
   methods: {
     sendMsg() {
       const frame = this.$refs['frame'];
-      frame.contentWindow.postMessage('XCXM', '*');
+      frame.contentWindow.postMessage('29', '*');
     }
   }
 }

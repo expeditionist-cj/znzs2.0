@@ -135,12 +135,12 @@ export default {
       item.mouseLeave = true
     },
     toParticulars(item) {
-      console.log(item)
       this.$store.commit('PUSH_NAVBARLIST', {
         title: item.modelName,
-        path: '/application/particulars',
+        path: `/application/particulars/${item.modelCode}`,
         query: {
-          modelUrl: item.modelUrl || 'http://localhost:8080'
+          modelUrl: item.modelUrl || 'http://172.16.0.89:9099'
+          // modelUrl: item.modelUrl || 'http://localhost:8080'
         }
       })
     }

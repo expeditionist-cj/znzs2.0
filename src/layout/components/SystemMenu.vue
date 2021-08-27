@@ -166,6 +166,7 @@ export default {
       font-size: 2rem;
     }
     .menu-title {
+      height: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -173,6 +174,7 @@ export default {
       .title-name {
         font-size: 1.4rem;
         line-height: 1.4rem;
+        margin-top: .5rem;
       }
     }
   }
